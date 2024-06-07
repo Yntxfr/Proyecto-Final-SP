@@ -6,7 +6,6 @@
 package com.example.soccerPlayer;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
 import java.util.*;
 
@@ -24,9 +23,9 @@ public class Partido {
     private String competicion;
     private LocalDate fecha;
     private String marcador;
-    private byte[] localCrest;
+    // private byte[] localCrest;
     private String localTeam;
-    private byte[] visitCrest;
+    // private byte[] visitCrest;
     private String visitTeam;
     private String tiempoJuego;
     private int minutos;
@@ -43,9 +42,9 @@ public class Partido {
         this.competicion = competicion;
         this.fecha = fecha;
         this.marcador = marcador;
-        this.localCrest = localCrest;
+        // this.localCrest = localCrest;
         this.localTeam = localTeam;
-        this.visitCrest = visitCrest;
+        // this.visitCrest = visitCrest;
         this.visitTeam = visitTeam;
         this.tiempoJuego = tiempoJuego;
         this.minutos = minutos;
@@ -87,12 +86,14 @@ public class Partido {
     }
 
     //
+    /*
     public byte[] getLocalCrest() {
         return localCrest;
     }
     public void setLocalCrest(byte[] localCrest) {
         this.localCrest = localCrest;
     }
+    */
 
     //
     public String getLocalTeam() {
@@ -103,12 +104,14 @@ public class Partido {
     }
 
     //
+    /*
     public byte[] getVisitCrest() {
         return visitCrest;
     }
     public void setVisitCrest(byte[] visitCrest) {
         this.visitCrest = visitCrest;
     }
+    */
 
     //
     public String getVisitTeam() {
