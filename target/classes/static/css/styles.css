@@ -250,7 +250,7 @@ header, .title {
     /* position: absolute; */
     padding: 17px 12px;
     width: 100%;
-    background: linear-gradient(270deg, #00519D 0%, #000741 100%);
+    /* background: linear-gradient(270deg, #00519D 0%, #000741 100%); */
     border-top-left-radius: 16px;
     border-top-right-radius: 16px;
 }
