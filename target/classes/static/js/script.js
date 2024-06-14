@@ -141,30 +141,31 @@ function createGameCard(data) {
     return gameCard;
 }
 
-// Define un objeto con el mapeo de nombres de competiciones a colores de fondo.
-/*
-const competitionColors = {
-    'Champions League': 'linear-gradient(270deg, #00519D 0%, #000741 100%)',
-    'Super Cup': 'linear-gradient(270deg, #000080 0%, #87CEEB 100%);',
-    'Club World Cup': 'linear-gradient(270deg, #B22234 0%, #FFD700 100%)',
-    'LaLiga': 'linear-gradient(270deg, #FFB800 0%, #E50000 100%)'
-    'Copa del Rey': 'linear-gradient(270deg, #8B0000 0%, #FF4500 100%)',
-    'Super Copa': 'linear-gradient(270deg, #1E90FF 0%, #FFD700 100%)',
-    'Amistoso': 'linear-gradient(270deg, #006400 0%, #7FFF00 100%)',
-    'Amistoso Naciones': 'linear-gradient(270deg, #FF0000 0%, #FFA500 100%)',
-    'World Cup': 'linear-gradient(270deg, #1E90FF 0%, #FFD700 100%)',
-    'Eurocup': 'linear-gradient(270deg, #00008B 0%, #FFD700 100%)'
-};
-// Función para aplicar el color de fondo basado en el nombre de la competición.
-function applyCompetitionColor(competitionName) {
-    const backgroundColor = competitionColors[competitionName];
-    if (backgroundColor) {
-        document.querySelector('.livescore-top').style.background = backgroundColor;
-    } else {
-        console.warn(`No background color defined for competition: ${competitionName}`);
-    }
+// Ordenar los partidos por fecha
+function sortGameCardsByDate(order = 'desc') {
+    // Obtener el contenedor de las tarjetas de juego
+    const container = document.querySelector('.games-scroll');
+    // Obtener todas las tarjetas de juego dentro del contenedor
+    const gameCards = Array.from(container.querySelectorAll('.single-game'));
+
+    // Ordenar los elementos según la fecha
+    gameCards.sort((cardA, cardB) => {
+        const dateA = new Date(cardA.querySelector('.game-date').textContent.trim());
+        const dateB = new Date(cardB.querySelector('.game-date').textContent.trim());
+
+        if (order === 'desc') {
+            return dateB - dateA; // Orden descendente
+        } else {
+            return dateA - dateB; // Orden ascendente
+        }
+    });
+
+    // Limpiar el contenedor actual
+    container.innerHTML = '';
+
+    // Agregar los elementos ordenados de vuelta al contenedor
+    gameCards.forEach(card => {
+        container.appendChild(card);
+    });
 }
 
-// Llama a la función con el nombre de la competición recibido.
-applyCompetitionColor(data.competicion);
-*/
