@@ -55,16 +55,29 @@ public class PartidoController {
             Partido Partido = optionalPartido.get();
             Partido.setCompeticion(partidoDetails.getCompeticion());
             Partido.setFecha(partidoDetails.getFecha());
-            Partido.setMarcador(partidoDetails.getMarcador());
-            // Partido.setLocalCrest(partidoDetails.getLocalCrest());
+
             Partido.setLocalTeam(partidoDetails.getLocalTeam());
-            // Partido.setVisitCrest(partidoDetails.getVisitCrest());
             Partido.setVisitTeam(partidoDetails.getVisitTeam());
-            Partido.setTiempoJuego(partidoDetails.getTiempoJuego());
+
             Partido.setMinutos(partidoDetails.getMinutos());
             Partido.setGoals(partidoDetails.getGoals());
             Partido.setAssists(partidoDetails.getAssists());
             Partido.setRating(partidoDetails.getRating());
+
+            Partido.setMarcadorLocal(partidoDetails.getMarcadorLocal());
+            Partido.setMarcadorVisitante(partidoDetails.getMarcadorVisitante());
+            Partido.setFaseCompeticion(partidoDetails.getFaseCompeticion());
+            Partido.setLocalCrest(partidoDetails.getLocalCrest());
+            Partido.setVisitCrest(partidoDetails.getVisitCrest());
+            Partido.setCompetitionLogo(partidoDetails.getCompetitionLogo());
+            Partido.setPlayerKit(partidoDetails.getPlayerKit());
+            Partido.setKitManufacturer(partidoDetails.getKitManufacturer());
+            Partido.setKitNumber(partidoDetails.getKitNumber());
+            Partido.setKitSleeve(partidoDetails.getKitSleeve());
+            Partido.setBackgroundColor(partidoDetails.getBackgroundColor());
+            Partido.setTarjetaAmarilla(partidoDetails.getTarjetaAmarilla());
+            Partido.setTarjetaRoja(partidoDetails.getTarjetaRoja());
+
 
             // Partido updatedPartido = partidoRepository.save(existingPartido);
             return ResponseEntity.ok(partidoRepository.save(Partido));

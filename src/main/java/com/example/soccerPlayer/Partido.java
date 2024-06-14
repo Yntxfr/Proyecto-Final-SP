@@ -22,35 +22,59 @@ public class Partido {
     private Long id;
     private String competicion;
     private LocalDate fecha;
-    private String marcador;
-    // private byte[] localCrest;
+
     private String localTeam;
-    // private byte[] visitCrest;
     private String visitTeam;
-    private String tiempoJuego;
+
     private int minutos;
     private int goals;
     private int assists;
     private double rating;
+
+    private int marcadorLocal; // Nueva propiedad
+    private int marcadorVisitante; // Nueva propiedad
+    private String faseCompeticion; // Nueva propiedad
+    private String localCrest; // Nueva propiedad
+    private String visitCrest; // Nueva propiedad
+    private String competitionLogo; // Nueva propiedad
+    private String playerKit; // Nueva propiedad
+    private String kitManufacturer; // Nueva propiedad
+    private String kitNumber; // Nueva propiedad
+    private String kitSleeve; // Nueva propiedad
+    private String backgroundColor; // Nueva propiedad
+    private int tarjetaAmarilla; // Nueva propiedad
+    private int tarjetaRoja; // Nueva propiedad
 
     // Constructor sin argumentos
     public Partido() {
     }
 
     // Constructor con argumentos
-    public Partido(String competicion, LocalDate fecha, String marcador, byte[] localCrest, String localTeam, byte[] visitCrest, String visitTeam, String tiempoJuego, int minutos, int goals, int assists, double rating) {
+    public Partido(String competicion, LocalDate fecha, String localTeam, String visitTeam, int minutos, int goals, int assists, double rating, int marcadorLocal, int marcadorVisitante, String faseCompeticion, String localCrest, String visitCrest, String competitionLogo, String playerKit, String kitManufacturer, String kitNumber, String kitSleeve, String backgroundColor, int tarjetaAmarilla, int tarjetaRoja) {
         this.competicion = competicion;
         this.fecha = fecha;
-        this.marcador = marcador;
-        // this.localCrest = localCrest;
+
         this.localTeam = localTeam;
-        // this.visitCrest = visitCrest;
         this.visitTeam = visitTeam;
-        this.tiempoJuego = tiempoJuego;
+
         this.minutos = minutos;
         this.goals = goals;
         this.assists = assists;
         this.rating = rating;
+
+        this.marcadorLocal = marcadorLocal;
+        this.marcadorVisitante = marcadorVisitante;
+        this.faseCompeticion = faseCompeticion;
+        this.localCrest = localCrest;
+        this.visitCrest = visitCrest;
+        this.competitionLogo = competitionLogo;
+        this.playerKit = playerKit;
+        this.kitManufacturer = kitManufacturer;
+        this.kitNumber = kitNumber;
+        this.kitSleeve = kitSleeve;
+        this.backgroundColor = backgroundColor;
+        this.tarjetaAmarilla = tarjetaAmarilla;
+        this.tarjetaRoja = tarjetaRoja;
     }
 
     // Getters and Setters
@@ -77,23 +101,6 @@ public class Partido {
         this.fecha = fecha;
     }
 
-    //
-    public String getMarcador() {
-        return marcador;
-    }
-    public void setMarcador(String marcador) {
-        this.marcador = marcador;
-    }
-
-    //
-    /*
-    public byte[] getLocalCrest() {
-        return localCrest;
-    }
-    public void setLocalCrest(byte[] localCrest) {
-        this.localCrest = localCrest;
-    }
-    */
 
     //
     public String getLocalTeam() {
@@ -104,16 +111,6 @@ public class Partido {
     }
 
     //
-    /*
-    public byte[] getVisitCrest() {
-        return visitCrest;
-    }
-    public void setVisitCrest(byte[] visitCrest) {
-        this.visitCrest = visitCrest;
-    }
-    */
-
-    //
     public String getVisitTeam() {
         return visitTeam;
     }
@@ -121,13 +118,6 @@ public class Partido {
         this.visitTeam = visitTeam;
     }
 
-    //
-    public String getTiempoJuego() {
-        return tiempoJuego;
-    }
-    public void setTiempoJuego(String tiempoJuego) {
-        this.tiempoJuego = tiempoJuego;
-    }
 
     //
     public int getMinutos() {
@@ -161,4 +151,72 @@ public class Partido {
         this.rating = rating;
     }
 
+
+    //
+    public int getMarcadorLocal() {
+        return marcadorLocal;
+    }
+    public void setMarcadorLocal(int marcadorLocal) {
+        this.marcadorLocal = marcadorLocal;
+    }
+
+    //
+    public int getMarcadorVisitante() {
+        return marcadorVisitante;
+    }
+    public void setMarcadorVisitante(int marcadorVisitante) {
+        this.marcadorVisitante = marcadorVisitante;
+    }
+
+    //
+    public String getFaseCompeticion() { return faseCompeticion; }
+    public void setFaseCompeticion(String faseCompeticion) {this.faseCompeticion = faseCompeticion;}
+
+    //
+    public String getLocalCrest() { return localCrest; }
+    public void setLocalCrest(String localCrest) {this.localCrest = localCrest;}
+
+    //
+    public String getVisitCrest() { return visitCrest; }
+    public void setVisitCrest(String visitCrest) { this.visitCrest = visitCrest; }
+
+    //
+    public String getCompetitionLogo() { return competitionLogo; }
+    public void setCompetitionLogo(String competitionLogo) { this.competitionLogo = competitionLogo; }
+
+    //
+    public String getPlayerKit() { return playerKit; }
+    public void setPlayerKit(String playerKit) { this.playerKit = playerKit; }
+
+    //
+    public String getKitManufacturer() { return kitManufacturer; }
+    public void setKitManufacturer(String kitManufacturer) { this.kitManufacturer = kitManufacturer; }
+
+    //
+    public String getKitNumber() { return kitNumber; }
+    public void setKitNumber(String kitNumber) { this.kitNumber = kitNumber; }
+
+    //
+    public String getKitSleeve() { return kitSleeve; }
+    public void setKitSleeve(String kitSleeve) { this.kitSleeve = kitSleeve; }
+
+    //
+    public String getBackgroundColor() { return backgroundColor; }
+    public void setBackgroundColor(String backgroundColor) { this.backgroundColor = backgroundColor; }
+
+    //
+    public int getTarjetaAmarilla() {
+        return tarjetaAmarilla;
+    }
+    public void setTarjetaAmarilla(int tarjetaAmarilla) {
+        this.tarjetaAmarilla = tarjetaAmarilla;
+    }
+
+    //
+    public int getTarjetaRoja() {
+        return tarjetaRoja;
+    }
+    public void setTarjetaRoja(int tarjetaRoja) {
+        this.tarjetaRoja = tarjetaRoja;
+    }
 }
