@@ -15,44 +15,37 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(showNextSlide, 3000); // Change image every 3 seconds
 });
 
-// Función para calcular estadísticas agregadas
-function calculateStats(matches) {
-    let totalMinutes = 0;
-    let totalGoals = 0;
-    let totalAssists = 0;
-    let totalRating = 0;
-    let matchCount = matches.length;
-
-    matches.forEach(match => {
-        totalMinutes += match.minutos;
-        totalGoals += match.goals;
-        totalAssists += match.assists;
-        totalRating += match.rating;
-    });
-
-    let averageRating = matchCount > 0 ? (totalRating / matchCount).toFixed(2) : 0;
-
-    return {
-        totalMinutes,
-        totalGoals,
-        totalAssists,
-        averageRating
-    };
-}
-
 // Función para mostrar PARTIDOS en el HTML
 document.addEventListener('DOMContentLoaded', function () {
     fetch('http://localhost:8080/Partido') // Ajusta la URL según la ruta de tu API
         .then(response => response.json())
         .then(data => {
-            const container = document.querySelector('.games-scroll');
-            data.forEach(partido => {
-                const gameCard = createGameCard(partido);
-                container.appendChild(gameCard);
+            window.allPartidos = data; // Guardamos todos los partidos en una variable global para facilitar el filtrado
+            displayPartidos(data); // Mostrar todos los partidos inicialmente
+
+            // Event listeners para los elementos del menú
+            document.querySelectorAll('.menu-nav-pages li ul li a').forEach(link => {
+                link.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    const filterType = this.closest('li').parentElement.parentElement.classList.contains('menu-btn-1') ? 'temporada' : 'competicion';
+                    const filterValue = this.textContent.trim();
+                    filterPartidos(filterType, filterValue);
+                    updateStatistics(filterType, filterValue);
+                });
             });
+            updateStatistics('all', ''); // Mostrar estadísticas iniciales para todos los partidos
         })
         .catch(error => console.error('Error fetching matches:', error));
 });
+
+function displayPartidos(partidos) {
+    const container = document.querySelector('.games-scroll');
+    container.innerHTML = '';
+    partidos.forEach(partido => {
+        const gameCard = createGameCard(partido);
+        container.appendChild(gameCard);
+    });
+}
 
 function createGameCard(data) {
     // Creación de elementos y asignación de datos
@@ -137,8 +130,41 @@ function createGameCard(data) {
             </div>
         </div>
     `;
-
     return gameCard;
+}
+
+// Filtrar partidos por competicion
+function filterPartidos(type, value) {
+    let filteredPartidos = [];
+
+    if (type === 'temporada') {
+        filteredPartidos = window.allPartidos.filter(partido => partido.temporada === value);
+    } else if (type === 'competicion') {
+        filteredPartidos = window.allPartidos.filter(partido => partido.competicion === value);
+    }
+
+    displayPartidos(filteredPartidos);
+}
+
+// Actualizar estadisticas "highlight"
+function updateStatistics(type, value) {
+    let filteredPartidos = window.allPartidos;
+
+    if (type === 'temporada') {
+        filteredPartidos = filteredPartidos.filter(partido => partido.temporada === value);
+    } else if (type === 'competicion') {
+        filteredPartidos = filteredPartidos.filter(partido => partido.competicion === value);
+    }
+
+    const totalMinutos = filteredPartidos.reduce((total, partido) => total + parseInt(partido.minutos, 10), 0);
+    const totalGoles = filteredPartidos.reduce((total, partido) => total + parseInt(partido.goals, 10), 0);
+    const totalAsistencias = filteredPartidos.reduce((total, partido) => total + parseInt(partido.assists, 10), 0);
+    const averageRating = (filteredPartidos.reduce((total, partido) => total + parseFloat(partido.rating), 0) / filteredPartidos.length).toFixed(2);
+
+    document.getElementById('total-time').textContent = `${totalMinutos}’`;
+    document.getElementById('total-goals').textContent = totalGoles;
+    document.getElementById('total-assists').textContent = totalAsistencias;
+    document.getElementById('average-rating').textContent = averageRating;
 }
 
 // Ordenar los partidos por fecha
@@ -169,3 +195,30 @@ function sortGameCardsByDate(order = 'desc') {
     });
 }
 
+
+/*
+// Función para calcular estadísticas agregadas
+function calculateStats(matches) {
+    let totalMinutes = 0;
+    let totalGoals = 0;
+    let totalAssists = 0;
+    let totalRating = 0;
+    let matchCount = matches.length;
+
+    matches.forEach(match => {
+        totalMinutes += match.minutos;
+        totalGoals += match.goals;
+        totalAssists += match.assists;
+        totalRating += match.rating;
+    });
+
+    let averageRating = matchCount > 0 ? (totalRating / matchCount).toFixed(2) : 0;
+
+    return {
+        totalMinutes,
+        totalGoals,
+        totalAssists,
+        averageRating
+    };
+}
+*/
